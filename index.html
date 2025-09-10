@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Distribics Technology</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0a0e27 100%);
+            color: white;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Header Navigation - FIXED TRANSPARENCY */
+        .header-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: transparent; /* Changed from rgba(0, 0, 0, 0.9) to transparent */
+            backdrop-filter: blur(5px); /* Reduced blur for better visibility of background */
+            z-index: 1000;
+            padding: 20px 40px;
+            transition: all 0.3s ease;
+        }
+
+        .header-nav.scrolled {
+            padding: 15px 40px;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px); /* Increased blur when scrolled */
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: white;
+            text-decoration: none;
+            letter-spacing: 0.05em;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Added text shadow for better readability */
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 400;
+            transition: opacity 0.3s ease;
+            letter-spacing: 0.02em;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Added text shadow for better readability */
+        }
+
+        .nav-links a:hover {
+            opacity: 0.7;
+        }
+
+        /* Hero Section - adjusted for header */
+        .hero-section {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle at center, rgba(99, 102, 241, 0.05) 0%, transparent 70%);
+            margin-top: 0; /* Header is fixed, so no margin needed */
+        }
+
+        /* About Us Section */
+        .about-section {
+            padding: 100px 40px;
+            background: linear-gradient(180deg, #0a0e27 0%, #0f1229 100%);
+            position: relative;
+        }
+
+        .about-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .about-title {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 40px;
+            text-align: center;
+            letter-spacing: 0.05em;
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .about-content {
+            display: grid;
+            gap: 30px;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+        }
+
+        .about-divider {
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            margin: 40px auto;
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .header-nav {
+                padding: 15px 20px;
+            }
+
+            .nav-links {
+                gap: 25px;
+            }
+
+            .about-section {
+                padding: 60px 20px;
+            }
+
+            .about-title {
+                font-size: 2rem;
+            }
+
+            .about-text {
+                font-size: 1rem;
+            }
+        }
+
+        /* Original hero content styles preserved below */
+        .hero-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, 
+                #ffffff 0%, 
+                #87CEEB 15%, 
+                #4A90E2 30%, 
+                #1E90FF 45%, 
+                #0066CC 60%, 
+                #87CEEB 75%, 
+                #ffffff 90%, 
+                #4A90E2 100%);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 
+                0 1px 0 rgba(204, 204, 204, 0.3),
+                0 2px 0 rgba(201, 201, 201, 0.3),
+                0 3px 0 rgba(187, 187, 187, 0.2),
+                0 0 3px rgba(30, 144, 255, 0.3),
+                0 1px 2px rgba(30, 144, 255, 0.2),
+                0 3px 5px rgba(30, 144, 255, 0.15);
+            opacity: 0;
+            filter: brightness(1.1) contrast(1.05);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            position: relative;
+        }
+
+        h1.animate-in {
+            animation: titleFadeIn 1.2s ease-out forwards, steelShine 8s ease-in-out infinite;
+            animation-delay: 0s, 1.2s;
+        }
+
+        h1::before {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(255, 255, 255, 0.4) 45%, 
+                rgba(255, 255, 255, 0.6) 50%, 
+                rgba(255, 255, 255, 0.4) 55%, 
+                transparent 100%);
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        h1.animate-in::before {
+            animation: shimmer 3s linear infinite;
+            animation-delay: 1.5s;
+            opacity: 1;
+        }
+
+        @keyframes titleFadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+                filter: blur(8px) brightness(1.1) contrast(1.05);
+            }
+            50% {
+                opacity: 0.7;
+                filter: blur(2px) brightness(1.15) contrast(1.1);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+                filter: blur(0px) brightness(1.1) contrast(1.05);
+            }
+        }
+
+        @keyframes steelShine {
+            0%, 100% {
+                background-position: 0% 50%;
+                filter: brightness(1.1) contrast(1.05);
+            }
+            25% {
+                background-position: 50% 50%;
+                filter: brightness(1.2) contrast(1.1) saturate(1.1);
+            }
+            50% {
+                background-position: 100% 50%;
+                filter: brightness(1.3) contrast(1.15) saturate(1.15);
+            }
+            75% {
+                background-position: 50% 50%;
+                filter: brightness(1.15) contrast(1.1) saturate(1.05);
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: -200% center;
+            }
+            100% {
+                background-position: 200% center;
+            }
+        }
+
+        .subtitle {
+            font-size: clamp(1rem, 2vw, 1.5rem);
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 2rem;
+            opacity: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            backface-visibility: hidden;
+            transform: translateZ(0);
+            will-change: opacity, transform;
+            letter-spacing: 0.01em;
+        }
+
+        .subtitle.animate-in {
+            animation: subtitleFadeIn 1s ease-out forwards;
+            animation-delay: 1.2s;
+        }
+
+        @keyframes subtitleFadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .circular-container {
+            position: absolute;
+            width: min(90vw, 90vh);
+            height: min(90vw, 90vh);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        /* Gas background layers */
+        .gas-background {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .gas-layer {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .gas-layer-1 {
+            background: radial-gradient(circle at 30% 40%, 
+                rgba(99, 102, 241, 0.15) 0%, 
+                rgba(139, 92, 246, 0.1) 25%, 
+                transparent 60%);
+            animation: gasSwirl1 25s ease-in-out infinite;
+            opacity: 0.7;
+        }
+
+        .gas-layer-2 {
+            background: radial-gradient(circle at 70% 60%, 
+                rgba(168, 85, 247, 0.12) 0%, 
+                rgba(99, 102, 241, 0.08) 30%, 
+                transparent 65%);
+            animation: gasSwirl2 30s ease-in-out infinite reverse;
+            opacity: 0.6;
+        }
+
+        .gas-layer-3 {
+            background: radial-gradient(circle at 50% 30%, 
+                rgba(124, 58, 237, 0.1) 0%, 
+                rgba(99, 102, 241, 0.05) 40%, 
+                transparent 70%);
+            animation: gasSwirl3 35s ease-in-out infinite;
+            opacity: 0.5;
+        }
+
+        @keyframes gasSwirl1 {
+            0%, 100% {
+                transform: rotate(0deg) scale(1);
+            }
+            25% {
+                transform: rotate(90deg) scale(1.1);
+            }
+            50% {
+                transform: rotate(180deg) scale(1.05);
+            }
+            75% {
+                transform: rotate(270deg) scale(1.15);
+            }
+        }
+
+        @keyframes gasSwirl2 {
+            0%, 100% {
+                transform: rotate(0deg) scale(1.05);
+            }
+            33% {
+                transform: rotate(-120deg) scale(1.15);
+            }
+            66% {
+                transform: rotate(-240deg) scale(1.1);
+            }
+        }
+
+        @keyframes gasSwirl3 {
+            0%, 100% {
+                transform: rotate(0deg) scale(1.1);
+            }
+            50% {
+                transform: rotate(360deg) scale(1.2);
+            }
+        }
+
+        /* SVG gas clouds */
+        .gas-svg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            opacity: 0.4;
+        }
+
+        .gas-cloud {
+            fill: url(#gasGradient);
+            opacity: 0.3;
+            mix-blend-mode: screen;
+        }
+
+        .gas-cloud-1 {
+            animation: cloudMorph1 20s ease-in-out infinite;
+            transform-origin: center;
+        }
+
+        .gas-cloud-2 {
+            animation: cloudMorph2 25s ease-in-out infinite reverse;
+            transform-origin: center;
+        }
+
+        .gas-cloud-3 {
+            animation: cloudMorph3 30s ease-in-out infinite;
+            transform-origin: center;
+        }
+
+        @keyframes cloudMorph1 {
+            0%, 100% {
+                transform: rotate(0deg) translateX(0) translateY(0) scale(1);
+                opacity: 0.3;
+            }
+            25% {
+                transform: rotate(45deg) translateX(20px) translateY(-10px) scale(1.1);
+                opacity: 0.4;
+            }
+            50% {
+                transform: rotate(90deg) translateX(-10px) translateY(20px) scale(0.95);
+                opacity: 0.25;
+            }
+            75% {
+                transform: rotate(135deg) translateX(-20px) translateY(-10px) scale(1.05);
+                opacity: 0.35;
+            }
+        }
+
+        @keyframes cloudMorph2 {
+            0%, 100% {
+                transform: rotate(0deg) scale(1);
+                opacity: 0.25;
+            }
+            50% {
+                transform: rotate(-180deg) scale(1.15);
+                opacity: 0.35;
+            }
+        }
+
+        @keyframes cloudMorph3 {
+            0%, 100% {
+                transform: rotate(0deg) translateX(0) scale(1);
+                opacity: 0.2;
+            }
+            33% {
+                transform: rotate(120deg) translateX(30px) scale(1.2);
+                opacity: 0.3;
+            }
+            66% {
+                transform: rotate(240deg) translateX(-30px) scale(0.9);
+                opacity: 0.25;
+            }
+        }
+
+        /* Particle field for additional depth */
+        .particle-field {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: radial-gradient(circle, 
+                rgba(255, 255, 255, 1) 0%, 
+                rgba(167, 139, 250, 0.8) 30%, 
+                transparent 70%);
+            border-radius: 50%;
+            box-shadow: 
+                0 0 6px rgba(255, 255, 255, 0.8),
+                0 0 12px rgba(167, 139, 250, 0.6);
+            bottom: -10px;
+            animation: floatUp 15s linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% {
+                bottom: -10px;
+                opacity: 0;
+                transform: translateX(0) scale(0);
+            }
+            5% {
+                opacity: 1;
+                transform: translateX(0) scale(1);
+            }
+            25% {
+                opacity: 0.8;
+                transform: translateX(30px) scale(1.2);
+            }
+            50% {
+                opacity: 0.6;
+                transform: translateX(-20px) scale(1);
+            }
+            75% {
+                opacity: 0.8;
+                transform: translateX(20px) scale(1.3);
+            }
+            95% {
+                opacity: 1;
+                transform: translateX(-10px) scale(1);
+            }
+            100% {
+                bottom: 100%;
+                opacity: 0;
+                transform: translateX(0) scale(0);
+            }
+        }
+
+        .particle:nth-child(odd) {
+            animation-duration: 18s;
+            width: 3px;
+            height: 3px;
+        }
+
+        .particle:nth-child(3n) {
+            animation-duration: 22s;
+            width: 5px;
+            height: 5px;
+        }
+
+        .particle:nth-child(5n) {
+            animation-duration: 12s;
+            width: 2px;
+            height: 2px;
+        }
+
+        svg#gosperSvg {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        .circular-mask {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center,
+                rgba(10, 14, 39, 0.95) 0%,
+                rgba(10, 14, 39, 0.9) 15%,
+                rgba(10, 14, 39, 0.7) 25%,
+                rgba(10, 14, 39, 0.3) 35%,
+                rgba(10, 14, 39, 0.1) 45%,
+                transparent 55%
+            );
+            pointer-events: none;
+            z-index: 5;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .circular-mask.fade-in {
+            opacity: 1;
+        }
+
+        .drawing-point {
+            fill: url(#particleGradient);
+            filter: drop-shadow(0 0 8px currentColor);
+            opacity: 0;
+            animation: fadeInPoint 0.8s ease-out forwards;
+        }
+
+        .trail-line {
+            fill: none;
+            stroke: url(#gradient);
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            opacity: 0;
+            filter: drop-shadow(0 0 4px rgba(99, 102, 241, 0.6));
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .trail-line.fade-in {
+            animation: fadeInLine 2s ease-out forwards;
+        }
+
+        @keyframes fadeInLine {
+            0% {
+                opacity: 0;
+                filter: drop-shadow(0 0 12px rgba(99, 102, 241, 0.9));
+            }
+            50% {
+                opacity: 0.5;
+                filter: drop-shadow(0 0 8px rgba(99, 102, 241, 0.7));
+            }
+            100% {
+                opacity: 0.8;
+                filter: drop-shadow(0 0 4px rgba(99, 102, 241, 0.6));
+            }
+        }
+
+        @keyframes fadeInPoint {
+            0% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            50% {
+                opacity: 0.5;
+                transform: scale(1.2);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                opacity: 0.6;
+                filter: drop-shadow(0 0 3px rgba(99, 102, 241, 0.5));
+            }
+            50% {
+                opacity: 1;
+                filter: drop-shadow(0 0 8px rgba(99, 102, 241, 0.8));
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                r: 4;
+            }
+            50% {
+                r: 6;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header class="header-nav" id="headerNav">
+        <nav class="nav-container">
+            <a href="/" class="nav-logo">DISTRIBICS</a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/papers">Papers</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="hero-content" id="heroContent">
+            <h1 data-text="Distribics Technology" id="heroTitle">Distribics Technology</h1>
+            <p class="subtitle" id="heroSubtitle">Systems Evolving</p>
+        </div>
+        
+        <div class="circular-container">
+            <!-- Gas background layers -->
+            <div class="gas-background">
+                <div class="gas-layer gas-layer-1"></div>
+                <div class="gas-layer gas-layer-2"></div>
+                <div class="gas-layer gas-layer-3"></div>
+                
+                <!-- SVG gas clouds -->
+                <svg class="gas-svg" viewBox="0 0 1000 1000">
+                    <defs>
+                        <radialGradient id="gasGradient">
+                            <stop offset="0%" style="stop-color:#a78bfa;stop-opacity:0.4" />
+                            <stop offset="30%" style="stop-color:#8b5cf6;stop-opacity:0.3" />
+                            <stop offset="60%" style="stop-color:#7c3aed;stop-opacity:0.15" />
+                            <stop offset="100%" style="stop-color:#6d28d9;stop-opacity:0" />
+                        </radialGradient>
+                        
+                        <filter id="turbulence">
+                            <feTurbulence type="fractalNoise" baseFrequency="0.01" numOctaves="2" result="turbulence"/>
+                            <feComposite in="turbulence" in2="SourceGraphic" operator="multiply"/>
+                        </filter>
+                        
+                        <filter id="glow">
+                            <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+                            <feMerge>
+                                <feMergeNode in="coloredBlur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                    </defs>
+                    
+                    <!-- Gas cloud shapes -->
+                    <ellipse class="gas-cloud gas-cloud-1" cx="300" cy="400" rx="180" ry="120" filter="url(#glow)" />
+                    <ellipse class="gas-cloud gas-cloud-2" cx="700" cy="600" rx="200" ry="150" filter="url(#glow)" />
+                    <ellipse class="gas-cloud gas-cloud-3" cx="500" cy="250" rx="150" ry="100" filter="url(#glow)" />
+                    
+                    <!-- Additional swirls -->
+                    <path class="gas-cloud gas-cloud-1" d="M 200 500 Q 400 300 600 500 T 800 500" fill="none" stroke="url(#gasGradient)" stroke-width="80" opacity="0.2" filter="url(#glow)" />
+                    <path class="gas-cloud gas-cloud-2" d="M 500 200 Q 300 400 500 600 T 500 800" fill="none" stroke="url(#gasGradient)" stroke-width="60" opacity="0.15" filter="url(#glow)" />
+                </svg>
+                
+                <!-- Particle field -->
+                <div class="particle-field" id="particleField"></div>
+            </div>
+            
+            <!-- Gosper SVG -->
+            <svg id="gosperSvg" viewBox="0 0 1000 1000">
+                <defs>
+                    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                        <stop offset="50%" style="stop-color:#764ba2;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#f093fb;stop-opacity:1" />
+                    </linearGradient>
+                    <radialGradient id="particleGradient">
+                        <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+                        <stop offset="30%" style="stop-color:#a78bfa;stop-opacity:1" />
+                        <stop offset="60%" style="stop-color:#8b5cf6;stop-opacity:0.8" />
+                        <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:0" />
+                    </radialGradient>
+                    <clipPath id="circleClip">
+                        <circle cx="500" cy="500" r="480" />
+                    </clipPath>
+                </defs>
+                
+                <g id="pathGroup" clip-path="url(#circleClip)">
+                    <!-- Path segments will be added here dynamically -->
+                </g>
+                
+                <g id="pointsGroup" clip-path="url(#circleClip)">
+                    <!-- Drawing points will be added here -->
+                </g>
+            </svg>
+            
+            <!-- Circular mask overlay -->
+            <div class="circular-mask" id="circularMask"></div>
+        </div>
+    </div>
+
+    <!-- About Us Section -->
+    <section class="about-section" id="about">
+        <div class="about-container">
+            <h2 class="about-title">About Us</h2>
+            <div class="about-divider"></div>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>
+                        Distribics Technology pioneers the intersection of distributed systems and advanced computational paradigms. We explore the emergent behaviors of complex networks, developing frameworks that mirror the organic evolution of natural systems.
+                    </p>
+                    <p>
+                        Our research focuses on self-organizing architectures, fractal computing patterns, and the mathematical elegance underlying distributed intelligence. Through rigorous analysis and innovative implementation, we push the boundaries of what's possible in decentralized computation.
+                    </p>
+                    <p>
+                        As systems evolve, so do we—constantly adapting, learning, and discovering new pathways in the vast landscape of distributed technology.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('headerNav');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Create floating particles
+        function createParticles() {
+            const particleField = document.getElementById('particleField');
+            const numParticles = 50;
+            
+            for (let i = 0; i < numParticles; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                
+                const baseDuration = 15;
+                const variance = 10;
+                particle.style.animationDuration = (baseDuration + Math.random() * variance) + 's';
+                
+                const horizontalShift = (Math.random() - 0.5) * 40;
+                particle.style.setProperty('--horizontal-shift', horizontalShift + 'px');
+                
+                particleField.appendChild(particle);
+            }
+        }
+
+        // L-system implementation for Peano-Gosper curve
+        class GosperCurve {
+            constructor(iterations = 3) {
+                this.iterations = iterations;
+                this.angle = 60;
+                this.axiom = 'A';
+                this.rules = {
+                    'A': 'A-B--B+A++AA+B-',
+                    'B': '+A-BB--B-A++A+B'
+                };
+            }
+
+            generate() {
+                let current = this.axiom;
+                
+                for (let i = 0; i < this.iterations; i++) {
+                    let next = '';
+                    for (let char of current) {
+                        next += this.rules[char] || char;
+                    }
+                    current = next;
+                }
+                
+                return current;
+            }
+
+            getPath(string, stepSize = 10) {
+                const points = [];
+                let x = 0, y = 0;
+                let angle = 0;
+                
+                points.push({x, y});
+                
+                for (let char of string) {
+                    if (char === 'A' || char === 'B') {
+                        x += stepSize * Math.cos(angle * Math.PI / 180);
+                        y += stepSize * Math.sin(angle * Math.PI / 180);
+                        points.push({x, y});
+                    } else if (char === '+') {
+                        angle += this.angle;
+                    } else if (char === '-') {
+                        angle -= this.angle;
+                    }
+                }
+                
+                return points;
+            }
+        }
+
+        // Multi-point drawing system
+        class MultiPointDrawer {
+            constructor(points, numDrawers = 10) {
+                this.points = points;
+                this.numDrawers = numDrawers;
+                this.currentIndices = new Array(numDrawers).fill(0);
+                this.pathSegments = [];
+                this.svg = document.getElementById('gosperSvg');
+                this.pathGroup = document.getElementById('pathGroup');
+                this.pointsGroup = document.getElementById('pointsGroup');
+                this.drawingPoints = [];
+                this.trailPaths = [];
+                this.speed = 11;
+                this.spacing = 15;
+                this.hasStartedDrawing = new Array(numDrawers).fill(false);
+                this.animationComplete = false;
+                this.textAnimationTriggered = false;
+                
+                this.initializeDrawers();
+            }
+
+            initializeDrawers() {
+                for (let i = 0; i < this.numDrawers; i++) {
+                    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                    path.classList.add('trail-line');
+                    path.setAttribute('d', '');
+                    path.style.animationDelay = `${i * 0.15}s`;
+                    this.pathGroup.appendChild(path);
+                    this.trailPaths.push(path);
+                    
+                    const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                    circle.classList.add('drawing-point');
+                    circle.setAttribute('r', 6 - (i * 0.3));
+                    circle.style.animationDelay = `${i * 0.1}s`;
+                    this.pointsGroup.appendChild(circle);
+                    this.drawingPoints.push(circle);
+                    
+                    this.currentIndices[i] = Math.max(0, i * this.spacing);
+                }
+            }
+
+            animate() {
+                const draw = () => {
+                    let allComplete = true;
+                    
+                    for (let i = 0; i < this.numDrawers; i++) {
+                        const currentIndex = this.currentIndices[i];
+                        
+                        if (currentIndex < this.points.length - 1) {
+                            allComplete = false;
+                            
+                            if (!this.hasStartedDrawing[i] && currentIndex >= i * this.spacing) {
+                                this.hasStartedDrawing[i] = true;
+                                this.trailPaths[i].classList.add('fade-in');
+                            }
+                            
+                            const endIndex = Math.min(currentIndex + this.speed, this.points.length - 1);
+                            
+                            let pathSegment = '';
+                            for (let j = currentIndex; j <= endIndex; j++) {
+                                const point = this.points[j];
+                                if (j === 0 || (i > 0 && j === i * this.spacing)) {
+                                    pathSegment += `M ${point.x} ${point.y} `;
+                                } else {
+                                    pathSegment += `L ${point.x} ${point.y} `;
+                                }
+                            }
+                            
+                            const currentPath = this.trailPaths[i].getAttribute('d');
+                            this.trailPaths[i].setAttribute('d', currentPath + pathSegment);
+                            
+                            const currentPoint = this.points[endIndex];
+                            this.drawingPoints[i].setAttribute('cx', currentPoint.x);
+                            this.drawingPoints[i].setAttribute('cy', currentPoint.y);
+                            
+                            const radius = 6 - (i * 0.3);
+                            this.drawingPoints[i].setAttribute('r', radius + Math.sin(Date.now() * 0.003) * 2);
+                            
+                            this.currentIndices[i] = endIndex;
+                        } else {
+                            if (this.drawingPoints[i].style.opacity !== '0') {
+                                this.drawingPoints[i].style.transition = 'opacity 0.5s ease-out';
+                                this.drawingPoints[i].style.opacity = '0';
+                                setTimeout(() => {
+                                    this.drawingPoints[i].style.display = 'none';
+                                }, 500);
+                            }
+                        }
+                    }
+                    
+                    if (!allComplete) {
+                        requestAnimationFrame(draw);
+                    } else if (!this.animationComplete) {
+                        this.animationComplete = true;
+                        
+                        if (!this.textAnimationTriggered) {
+                            this.textAnimationTriggered = true;
+                            
+                            setTimeout(() => {
+                                const heroTitle = document.getElementById('heroTitle');
+                                const heroSubtitle = document.getElementById('heroSubtitle');
+                                const circularMask = document.getElementById('circularMask');
+                                
+                                circularMask.classList.add('fade-in');
+                                heroTitle.classList.add('animate-in');
+                                heroSubtitle.classList.add('animate-in');
+                            }, 500);
+                        }
+                        
+                        setTimeout(() => {
+                            this.trailPaths.forEach(path => {
+                                path.style.animation = 'glow 4s ease-in-out infinite';
+                            });
+                        }, 2000);
+                    }
+                };
+                
+                draw();
+            }
+        }
+
+        // Generate and draw the Gosper curve
+        function initGosperCurve() {
+            const gosper = new GosperCurve(3);
+            const curveString = gosper.generate();
+            const points = gosper.getPath(curveString, 5);
+            
+            let minX = Infinity, maxX = -Infinity;
+            let minY = Infinity, maxY = -Infinity;
+            
+            points.forEach(p => {
+                minX = Math.min(minX, p.x);
+                maxX = Math.max(maxX, p.x);
+                minY = Math.min(minY, p.y);
+                maxY = Math.max(maxY, p.y);
+            });
+            
+            const width = maxX - minX;
+            const height = maxY - minY;
+            const scale = Math.min(800 / width, 800 / height);
+            
+            const transformedPoints = points.map(p => ({
+                x: 500 + (p.x - (minX + maxX) / 2) * scale,
+                y: 500 + (p.y - (minY + maxY) / 2) * scale
+            }));
+            
+            const drawer = new MultiPointDrawer(transformedPoints, 10);
+            
+            setTimeout(() => {
+                drawer.animate();
+            }, 500);
+        }
+
+        // Initialize on load
+        window.addEventListener('load', () => {
+            createParticles();
+            initGosperCurve();
+        });
+
+        // Regenerate on window resize
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                document.getElementById('pathGroup').innerHTML = '';
+                document.getElementById('pointsGroup').innerHTML = '';
+                document.getElementById('particleField').innerHTML = '';
+                
+                const heroTitle = document.getElementById('heroTitle');
+                const heroSubtitle = document.getElementById('heroSubtitle');
+                const circularMask = document.getElementById('circularMask');
+                
+                heroTitle.classList.remove('animate-in');
+                heroSubtitle.classList.remove('animate-in');
+                circularMask.classList.remove('fade-in');
+                
+                createParticles();
+                initGosperCurve();
+            }, 0);
+        });
+    </script>
+</body>
+</html>
